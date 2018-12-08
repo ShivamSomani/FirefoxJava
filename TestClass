@@ -1,0 +1,21 @@
+package first;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class TestClass {
+	
+	public static void main(String[] args) {
+		
+	WebDriver driver;
+	
+	System.setProperty("webdriver.gecko.driver","/Users/shivam.somani/Documents/selenium_dependencies/geckodriver");
+	 
+	driver =new FirefoxDriver();
+	
+	String baseURL = "http://www.google.com";
+	driver.get(baseURL);
+	
+	}
+
+}
