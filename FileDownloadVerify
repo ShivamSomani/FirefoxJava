@@ -1,0 +1,75 @@
+// In this you can know if the file in the downloads folder is .xls or any other extension (basically verify the extension of the file present in the downloads folder)
+
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
+public class FileDownloadVerify {
+
+    private WebDriver driver;
+
+//    private String URL = "http://spreadsheetpage.com/index.php/file/C35/P10/";
+
+    @Before
+    public void setUp() throws Exception {
+//        System.setProperty("webdriver.gecko.driver","/Users/shivam.somani/Documents/selenium_dependencies/geckodriver");
+//        driver = new FirefoxDriver();
+
+        System.setProperty("webdriver.chrome.driver", "/Users/shivam.somani/Documents/selenium_dependencies/chromedriver");
+        driver = new ChromeDriver();
+
+//         Maximize the browser's window
+//        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+
+    public static void checkFileExtension() throws IOException {
+        File folder = new File("/Users/shivam.somani/Downloads/new_new");
+//        FileUtils.cleanDirectory(folder);
+        File[] listOfFiles = folder.listFiles();
+        if (listOfFiles.length == 1) {
+            File file = listOfFiles[0];
+            System.out.println(file);
+//            file.delete();
+            Assert.assertTrue(file.getName().contains("xls"));
+
+        } else {
+            FileUtils.cleanDirectory(folder);
+        }
+    }
+
+
+
+    @Test
+    public void testJSClick1() throws IOException {
+////        File f = null;
+////        driver.get("http://file-examples.com/index.php/sample-documents-download/sample-xls-download/");
+////        WebElement element = driver.findElement(By.xpath("//table[@id='table-files']/tbody/tr[1]//a[@href='http://file-examples.com/wp-content/uploads/2017/02/file_example_XLS_10.xls']"));
+////        element.click();
+////        String path = "/Users/shivam.somani/Downloads/file_example_XLS_10.xls";
+//        String path = "/Users/shivam.somani/Downloads/";
+//        String filename = "file_example_XLS_10.xls";
+//        isFileDownloaded(path, filename);
+//        System.out.println("now deleting");
+        checkFileExtension();
+
+
+
+    }
+
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+}
